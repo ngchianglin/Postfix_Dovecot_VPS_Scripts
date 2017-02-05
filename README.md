@@ -10,7 +10,9 @@ In this particular setup, Postfix is configured for virtual domains, non unix ac
 for virtual users and uses passwd-file as authentication. The perl scripts in the repository help to automate the management of email accounts in such a setup. 
 
 Refer to the following sites for more information on Postfix and Dovecot
+
 [http://www.postfix.org/](http://www.postfix.org/)
+
 [https://www.dovecot.org/](https://www.dovecot.org/)
 
 
@@ -53,8 +55,6 @@ Gpg Signed commits are used for committing the source files.
 > Look at the repository commits tab for the verified label for each commit. 
 
 > A userful link on how to verify gpg signature in [https://github.com/blog/2144-gpg-signature-verification](https://github.com/blog/2144-gpg-signature-verification)
-
-
 
 
 

@@ -55,13 +55,21 @@ my $VMAILBOX = "/example_location/postfix/vmailbox";
 #Dovecot passwd-file
 my $AUTHFILE ="/example_location/nighthour.sg/passwd";
 
+#User account that owns the dovecot $AUTHFILE
+my $DOVEAUTH="doveowner";
+
 #Postfix postmap binary
 my $POSTMAP ="/usr/sbin/postmap";
+
+#Unix chown binary
+my $CHOWN_CMD="/bin/chown";
 
 #Defines minimum password length
 my $P_LEN_LIMIT = 12;
 #Defines the minimum number for lower, upper letters, symbol and digits
 my $P_TYPE_LIMIT =2; 
+
+
 
 my $password; 
 
@@ -125,6 +133,15 @@ my $shadowpass = crypt($password, '$6$' . $salt);
 
 my $dovecot_authline = $emailadd . ":" . $shadowpass ;
 appendEntry( $AUTHFILE, $dovecot_authline);
+
+
+$cmd = $CHOWN_CMD ." " . $DOVEAUTH . ": " . $AUTHFILE;
+if (system($cmd) != 0 )
+{
+    
+    die "Error setting ownership of $AUTHFILE !\n"
+        . "Check and manually set ownership of $AUTHFILE to prevent dovecot server errors !\n";
+}
 
 print "Account created\n";
 
